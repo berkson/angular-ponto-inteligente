@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {
   CadastroPjModule,
+  CadastroPjRoutingModule,
   LoginModule,
   LoginRoutingModule,
 } from './autenticacao';
@@ -18,6 +19,7 @@ import {
     LoginModule,
     LoginRoutingModule,
     CadastroPjModule,
+    CadastroPjRoutingModule,
     AppRoutingModule,
   ],
   providers: [],
