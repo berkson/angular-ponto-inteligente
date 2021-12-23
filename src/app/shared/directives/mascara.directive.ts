@@ -46,13 +46,15 @@ export class MascaraDirective implements ControlValueAccessor {
       return;
     }
 
+    // tamanho do campo máscara somente com números
     let pad = this.mascara.replace(/\D/g, '').replace(/9/g, '_');
     if (valor.length <= pad.length) this.onChange(valor);
 
     $event.target.value = this.aplicarMascara(valor);
   }
 
-  @HostListener('blur', ['event'])
+  // se campo incompleto e perder o foco, é apagado
+  @HostListener('blur', ['$event'])
   onBlur($event: any) {
     if ($event.target.value.length === this.mascara.length) return;
     this.onChange('');
@@ -61,17 +63,20 @@ export class MascaraDirective implements ControlValueAccessor {
 
   aplicarMascara(valor: string): string {
     valor = valor.replace(/D/g, '');
+    // memorizar o limite de tamanho
     let pad = this.mascara.replace(/\D/g, '').replace(/9/g, '_');
     let maskValue = valor + pad.substring(0, pad.length - valor.length);
-    let maskValuePos = 0;
+    console.log(maskValue);
+    let maskValuePos = 0; // memoriza posição do último número inserido
 
     valor = '';
 
+    // lógica de substituição
     for (let i = 0; i < this.mascara.length; i++) {
       if (isNaN(parseInt(this.mascara.charAt(i)))) {
-        valor += this.mascara.charAt(i);
+        valor += this.mascara.charAt(i); // insere caractere não númerico conforme a máscara
       } else {
-        valor += maskValue[maskValuePos++];
+        valor += maskValue[maskValuePos++]; // adiciona o próximo número ao valor
       }
     }
 
