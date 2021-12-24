@@ -45,9 +45,10 @@ export class LoginComponent implements OnInit {
         //atob() decodificador de base64
         const usuarioData = JSON.parse(atob(tokenData.split('.')[1]));
         //console.log(JSON.stringify(usuarioData));
-        if (usuarioData['role'] === 'ROLE_ADMIN') alert('to admin page');
-        //this.router.navigate(['/admin']);
-        else alert('to func page'); //this.router.navigate(['/funcionario']);
+
+        if (usuarioData['role'] === 'ROLE_ADMIN')
+          this.router.navigate(['/admin']);
+        else this.router.navigate(['/funcionario']);
       },
       error: (err) => {
         // console.log(JSON.stringify(err));
