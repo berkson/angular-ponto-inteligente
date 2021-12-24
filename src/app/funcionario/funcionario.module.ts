@@ -18,6 +18,7 @@ import {
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { HttpUtilService, LancamentoService } from '../shared';
 
 @NgModule({
   declarations: [ListagemComponent, LancamentoComponent, FuncionarioComponent],
@@ -36,5 +37,6 @@ import { MatSortModule } from '@angular/material/sort';
     MatSortModule,
     MatCardModule,
   ],
+  providers: [LancamentoService, HttpUtilService],
 })
 export class FuncionarioModule {}

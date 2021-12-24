@@ -2,7 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
-import { Tipo } from 'src/app/shared';
+import {
+  HttpUtilService,
+  Lancamento,
+  LancamentoService,
+  Tipo,
+} from 'src/app/shared';
 
 declare var navigator: any; // objeto do próprio navegador para recuperar a localização
 
@@ -17,7 +22,12 @@ export class LancamentoComponent implements OnInit {
   geoLocation: string;
   ultimoTipoLancado: string;
 
-  constructor(private snackBar: MatSnackBar, private routerr: Router) {
+  constructor(
+    private snackBar: MatSnackBar,
+    private router: Router,
+    private lancamentoService: LancamentoService,
+    private httpUtilService: HttpUtilService
+  ) {
     this._dataAtualEn = '';
     this.dataAtual = '';
     this.geoLocation = '';
@@ -39,7 +49,15 @@ export class LancamentoComponent implements OnInit {
   }
 
   obterUltimoLancamento() {
-    this.ultimoTipoLancado = '';
+    this.lancamentoService.buscarUltimoTipoLancado().subscribe({
+      next: (data) => {
+        this.ultimoTipoLancado = data.data ? data.data.tipo : '';
+      },
+      error: (err) => {
+        const msg: string = 'Erro obtendo o último lançamento.';
+        this.snackBar.open(msg, 'Erro', { duration: 5000 });
+      },
+    });
   }
   obterGeoLocation() {
     if (navigator.geolocation) {
@@ -75,8 +93,24 @@ export class LancamentoComponent implements OnInit {
   }
 
   cadastrar(tipoPonto: Tipo) {
-    alert(`Tipo: ${tipoPonto}, DataAtualEn: ${this.dataAtualEn},
-    geoLocation: ${this.geoLocation}`);
+    const lancamento: Lancamento = new Lancamento(
+      this.dataAtualEn,
+      tipoPonto,
+      this.geoLocation,
+      this.httpUtilService.obterIdUsuario()
+    );
+    this.lancamentoService.cadastrar(lancamento).subscribe({
+      next: (data) => {
+        const msg: string = 'Lançamento realizado com sucesso!';
+        this.snackBar.open(msg, 'Sucesso', { duration: 5000 });
+        this.router.navigate(['/funcionario/listagem']);
+      },
+      error: (err) => {
+        let msg = 'Tente novamente em instantes';
+        if (err.status == 400) msg = err.error.errors.join(' ');
+        this.snackBar.open(msg, 'Erro', { duration: 5000 });
+      },
+    });
   }
 
   exibirInicioTrabalho(): boolean {
