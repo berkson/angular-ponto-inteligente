@@ -1,11 +1,11 @@
-import { AbstractControl } from '@angular/forms';
+import { AbstractControl, ValidationErrors } from '@angular/forms';
 
 export class CnpjValidator {
-  static validate(control: AbstractControl): { [key: string]: boolean } | null {
+  static validate(control: AbstractControl): ValidationErrors | null {
     if (this.cnpjValido(control.value)) {
       return null;
     }
-    return { cpf: true };
+    return { cnpj: true };
   }
 
   static cnpjValido(cnpj: any): boolean {
