@@ -12,8 +12,8 @@ export class HttpUtilService {
     let httpHeaders: HttpHeaders = new HttpHeaders();
     if (localStorage[LoginComponent.TOKEN_TAG]) {
       httpHeaders = httpHeaders.set(
-        'authorization',
-        `bearer ${localStorage[LoginComponent.TOKEN_TAG]}`
+        'Authorization',
+        `Bearer ${localStorage[LoginComponent.TOKEN_TAG]}`
       );
     }
     return { headers: httpHeaders };
