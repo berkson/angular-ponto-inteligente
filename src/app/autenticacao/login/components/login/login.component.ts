@@ -12,7 +12,7 @@ import { Login } from '../../components';
 })
 export class LoginComponent implements OnInit {
   form!: FormGroup;
-  public readonly TOKEN_TAG: string = 'token';
+  public static readonly TOKEN_TAG: string = 'token';
 
   constructor(
     private fb: FormBuilder,
@@ -39,18 +39,18 @@ export class LoginComponent implements OnInit {
     const login: Login = this.form.value;
     this.loginService.logar(login).subscribe({
       next: (data) => {
-        let tokenData = data['data'][this.TOKEN_TAG];
-        console.log(JSON.stringify(data));
-        localStorage[this.TOKEN_TAG] = tokenData;
+        let tokenData = data['data'][LoginComponent.TOKEN_TAG];
+        //console.log(JSON.stringify(data));
+        localStorage[LoginComponent.TOKEN_TAG] = tokenData;
         //atob() decodificador de base64
         const usuarioData = JSON.parse(atob(tokenData.split('.')[1]));
-        console.log(JSON.stringify(usuarioData));
+        //console.log(JSON.stringify(usuarioData));
         if (usuarioData['role'] === 'ROLE_ADMIN') alert('to admin page');
         //this.router.navigate(['/admin']);
         else alert('to func page'); //this.router.navigate(['/funcionario']);
       },
       error: (err) => {
-        console.log(JSON.stringify(err));
+        // console.log(JSON.stringify(err));
         let msg: string = 'Tente Novamente em instantes';
         if (err['status'] == 401) {
           msg = 'Email/Senha inválido(s).';
