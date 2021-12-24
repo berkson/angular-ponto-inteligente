@@ -12,21 +12,23 @@ import { CadastroPjService } from '../../services';
   styleUrls: ['./cadastrar-pj.component.css'],
 })
 export class CadastrarPjComponent implements OnInit {
-  form!: FormGroup;
+  form: FormGroup;
 
   constructor(
     private fb: FormBuilder,
     private snackBar: MatSnackBar,
     private router: Router,
     private cadastroPjService: CadastroPjService
-  ) {}
-
-  ngOnInit(): void {
-    this.gerarForm();
+  ) {
+    this.form = this.gerarForm();
   }
 
-  gerarForm() {
-    this.form = this.fb.group({
+  ngOnInit(): void {
+    //this.gerarForm();
+  }
+
+  gerarForm(): FormGroup {
+    return this.fb.group({
       nome: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
       senha: ['', [Validators.required, Validators.minLength(6)]],
@@ -46,7 +48,7 @@ export class CadastrarPjComponent implements OnInit {
         const msg: string = 'Realize o login para acessar o sistema.';
         this.snackBar.open(msg, 'Sucesso', { duration: 5000 });
         this.router.navigate(['/login']);
-      },  
+      },
       error: (err) => {
         console.log(JSON.stringify(err));
         let msg: string = 'Tente novamente em instantes.';
