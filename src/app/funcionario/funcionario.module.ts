@@ -16,9 +16,16 @@ import {
   ListagemComponent,
 } from './components';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import {
+  MatPaginatorIntl,
+  MatPaginatorModule,
+} from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-import { HttpUtilService, LancamentoService } from '../shared';
+import {
+  HttpUtilService,
+  LancamentoService,
+  PtBrMatPaginatorIntl,
+} from '../shared';
 import { DataBrPipe } from '../shared/pipes';
 
 @NgModule({
@@ -43,6 +50,10 @@ import { DataBrPipe } from '../shared/pipes';
     MatSortModule,
     MatCardModule,
   ],
-  providers: [LancamentoService, HttpUtilService],
+  providers: [
+    LancamentoService,
+    HttpUtilService,
+    { provide: MatPaginatorIntl, useClass: PtBrMatPaginatorIntl },
+  ],
 })
 export class FuncionarioModule {}
