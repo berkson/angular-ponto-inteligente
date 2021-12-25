@@ -13,7 +13,7 @@
   <ng-container matColumnDef="tipo">
     <mat-header-cell *matHeaderCellDef mat-sort-header> Tipo </mat-header-cell>
     <mat-cell *matCellDef="let lancamento">
-      {{ lancamento.tipo }}
+      {{ lancamento.tipo | tipo }}
     </mat-cell>
   </ng-container>
 

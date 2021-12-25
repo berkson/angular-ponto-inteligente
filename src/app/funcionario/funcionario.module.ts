@@ -25,16 +25,12 @@ import {
   HttpUtilService,
   LancamentoService,
   PtBrMatPaginatorIntl,
+  SharedModule,
 } from '../shared';
 import { DataBrPipe } from '../shared/pipes';
 
 @NgModule({
-  declarations: [
-    ListagemComponent,
-    LancamentoComponent,
-    FuncionarioComponent,
-    DataBrPipe,
-  ],
+  declarations: [ListagemComponent, LancamentoComponent, FuncionarioComponent],
   imports: [
     CommonModule,
     FlexLayoutModule,
@@ -49,6 +45,7 @@ import { DataBrPipe } from '../shared/pipes';
     MatPaginatorModule,
     MatSortModule,
     MatCardModule,
+    SharedModule,
   ],
   providers: [
     LancamentoService,
