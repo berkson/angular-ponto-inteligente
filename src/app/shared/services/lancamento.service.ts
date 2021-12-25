@@ -40,4 +40,11 @@ export class LancamentoService {
       this.httpUtilService.headers()
     );
   }
+
+  listarTodosLancamentos(): Observable<any> {
+    return this.httpClient.get(
+      env.baseApiUrl + this.PATH + this.replaceFuncId(this.PATH_ALL_LANCS),
+      this.httpUtilService.headers()
+    );
+  }
 }

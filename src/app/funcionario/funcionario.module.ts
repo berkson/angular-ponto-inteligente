@@ -19,9 +19,15 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { HttpUtilService, LancamentoService } from '../shared';
+import { DataBrPipe } from '../shared/pipes';
 
 @NgModule({
-  declarations: [ListagemComponent, LancamentoComponent, FuncionarioComponent],
+  declarations: [
+    ListagemComponent,
+    LancamentoComponent,
+    FuncionarioComponent,
+    DataBrPipe,
+  ],
   imports: [
     CommonModule,
     FlexLayoutModule,
