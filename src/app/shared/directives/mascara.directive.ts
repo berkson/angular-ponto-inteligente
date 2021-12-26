@@ -66,7 +66,6 @@ export class MascaraDirective implements ControlValueAccessor {
     // memorizar o limite de tamanho
     let pad = this.mascara.replace(/\D/g, '').replace(/9/g, '_');
     let maskValue = valor + pad.substring(0, pad.length - valor.length);
-    console.log(maskValue);
     let maskValuePos = 0; // memoriza posição do último número inserido
 
     valor = '';

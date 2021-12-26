@@ -12,7 +12,7 @@ import { CadastroPf } from '../../models';
   styleUrls: ['./cadastrar-pf.component.css'],
 })
 export class CadastrarPfComponent implements OnInit {
-  form!: FormGroup;
+  form: FormGroup = new FormGroup({});
 
   constructor(
     private fb: FormBuilder,
@@ -32,6 +32,14 @@ export class CadastrarPfComponent implements OnInit {
       cpf: ['', [Validators.required, CpfValidator]],
       cnpj: ['', [Validators.required, CnpjValidator]],
     });
+  }
+
+  get cpf() {
+    return this.form.get('cpf');
+  }
+
+  get cnpj() {
+    return this.form.get('cnpj');
   }
 
   cadastrarPf() {
