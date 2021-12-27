@@ -4,7 +4,7 @@
       placeholder="Funcionários"
       formControlName="funcs"
       [(value)]="funcionarioId"
-      (selectionChange)="exibirLancamentos()"
+      (selectionChange)="exibirLancamentos($event.value)"
     >
       <mat-option
         *ngFor="let funcionario of funcionarios"

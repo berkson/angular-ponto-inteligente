@@ -88,8 +88,16 @@ export class ListagemComponent implements OnInit {
     this.direcao = 'DESC';
   }
 
-  exibirLancamentos() {
-    this.funcionarioId = '3';
+  exibirLancamentos(value?: { value: string } | undefined) {
+    console.log(value);
+    if (this.matSelect.selected && value !== undefined) {
+      this.funcionarioId = String(value); // verificar o resto da aplicação
+    } else if (this.funcId) {
+      this.funcionarioId = this.funcId;
+    } else {
+      return;
+    }
+    sessionStorage['funcionarioId'] = this.funcionarioId;
     this.lancamentoService
       .listarLancamentosPorFuncionario(
         this.funcionarioId,
@@ -105,7 +113,7 @@ export class ListagemComponent implements OnInit {
         },
         error: (err) => {
           const msg = 'Erro obtendo lançamentos!';
-          this.snackBar.open(msg, 'Erroa', { duration: 5000 });
+          this.snackBar.open(msg, 'Erro', { duration: 5000 });
         },
       });
   }
