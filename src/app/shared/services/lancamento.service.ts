@@ -19,11 +19,14 @@ export class LancamentoService {
     private httpUtilService: HttpUtilService
   ) {}
 
-  replaceFuncId(path: string): string {
-    return path.replace(
-      '{funcionarioId}',
-      this.httpUtilService.obterIdUsuario()
-    );
+  replaceFuncId(path: string, funcionarioId?: string): string {
+    if (funcionarioId === undefined) {
+      return path.replace(
+        '{funcionarioId}',
+        this.httpUtilService.obterIdUsuario()
+      );
+    }
+    return path.replace('{funcionarioId}', funcionarioId);
   }
 
   buscarUltimoTipoLancado(): Observable<any> {
@@ -46,5 +49,20 @@ export class LancamentoService {
       env.baseApiUrl + this.PATH + this.replaceFuncId(this.PATH_ALL_LANCS),
       this.httpUtilService.headers()
     );
+  }
+
+  listarLancamentosPorFuncionario(
+    funcionarioId: string,
+    pagina: number,
+    ordem: string,
+    direcao: string
+  ): Observable<any> {
+    const url: string =
+      env.baseApiUrl +
+      this.PATH +
+      this.replaceFuncId(this.PATH_LANCS, funcionarioId);
+    const params: string =
+      '?pag=' + pagina + '&ord=' + ordem + '&dir=' + direcao;
+    return this.httpClient.get(url + params, this.httpUtilService.headers());
   }
 }
