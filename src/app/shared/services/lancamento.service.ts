@@ -65,4 +65,11 @@ export class LancamentoService {
       '?pag=' + pagina + '&ord=' + ordem + '&dir=' + direcao;
     return this.httpClient.get(url + params, this.httpUtilService.headers());
   }
+
+  remover(lancamentoId: string): Observable<any> {
+    return this.httpClient.delete(
+      env.baseApiUrl + this.PATH + '/' + lancamentoId,
+      this.httpUtilService.headers()
+    );
+  }
 }

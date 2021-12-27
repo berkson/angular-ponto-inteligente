@@ -4,7 +4,7 @@
       placeholder="Funcionários"
       formControlName="funcs"
       [(value)]="funcionarioId"
-      (selectionChange)="exibirLancamentos($event.value)"
+      (selectionChange)="exibirLancamentos($event)"
     >
       <mat-option
         *ngFor="let funcionario of funcionarios"
@@ -53,7 +53,7 @@
       <a routerLink="{{ '/admin/atualizacao/' + lancamento.id }}"
         ><mat-icon matTooltip="Editar lançamento">create</mat-icon></a
       >
-      <a (click)="remover(lancamento.id)" style="cursor: pointer"
+      <a (click)="removerDialog(lancamento.id)" style="cursor: pointer"
         ><mat-icon matTooltip="Remover lançamento">clear</mat-icon></a
       >
     </mat-cell>

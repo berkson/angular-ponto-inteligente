@@ -4,6 +4,7 @@ import {
   AdminComponent,
   AtualizacaoComponent,
   CadastroComponent,
+  ConfirmarDialog,
   ListagemComponent,
 } from './components';
 import { RouterModule } from '@angular/router';
@@ -62,6 +63,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CadastroComponent,
     AtualizacaoComponent,
     AdminComponent,
+    ConfirmarDialog,
   ],
   providers: [
     LancamentoService,
