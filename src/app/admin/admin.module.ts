@@ -26,17 +26,21 @@ import {
 } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import {
+  FuncionarioService,
   HttpUtilService,
   LancamentoService,
   PtBrMatPaginatorIntl,
   SharedModule,
 } from '../shared';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
     FlexLayoutModule,
+    FormsModule,
+    ReactiveFormsModule,
     MatInputModule,
     MatButtonModule,
     MatListModule,
@@ -63,6 +67,7 @@ import {
     LancamentoService,
     HttpUtilService,
     MatPaginatorIntl,
+    FuncionarioService,
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
     { provide: MatPaginatorIntl, useClass: PtBrMatPaginatorIntl },
   ],
