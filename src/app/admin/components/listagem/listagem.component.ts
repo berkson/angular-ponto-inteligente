@@ -135,7 +135,7 @@ export class ListagemComponent implements OnInit {
     this.exibirLancamentos();
   }
 
-  removerDialog(lancamentoId: string) {
+  removerDialog(lancamentoId: string): void {
     const dialog = this.dialog.open(ConfirmarDialog, {});
     dialog.afterClosed().subscribe((remover) => {
       if (remover) this.remover(lancamentoId);
