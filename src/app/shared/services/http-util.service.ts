@@ -19,22 +19,32 @@ export class HttpUtilService {
     return { headers: httpHeaders };
   }
 
+  isUserLogged(): boolean {
+    return localStorage[LoginComponent.TOKEN_TAG];
+  }
+
   obterIdUsuario(): string {
-    if (!localStorage[LoginComponent.TOKEN_TAG]) return '';
+    if (!this.isUserLogged()) return '';
     const dadosUsuario = this.obterDadosUsuario();
     return dadosUsuario ? dadosUsuario.id : '';
   }
 
   obterIdEmpresa(): string {
-    if (!localStorage[LoginComponent.TOKEN_TAG]) return '';
+    if (!this.isUserLogged()) return '';
     const dadosUsuario = this.obterDadosUsuario();
     return dadosUsuario ? dadosUsuario.empresaId : '';
   }
 
   obterDadosUsuario() {
-    if (!localStorage[LoginComponent.TOKEN_TAG]) return '';
+    if (!this.isUserLogged()) return '';
     return JSON.parse(
       atob(localStorage[LoginComponent.TOKEN_TAG].split('.')[1])
     );
+  }
+
+  obterPerfil(): string {
+    if (!this.isUserLogged()) return '';
+    const dadosUsuario = this.obterDadosUsuario();
+    return dadosUsuario ? dadosUsuario.role : '';
   }
 }

@@ -27,6 +27,7 @@ import {
 } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import {
+  AdminGuardService,
   FuncionarioService,
   HttpUtilService,
   LancamentoService,
@@ -72,6 +73,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FuncionarioService,
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
     { provide: MatPaginatorIntl, useClass: PtBrMatPaginatorIntl },
+    AdminGuardService,
   ],
 })
 export class AdminModule {}

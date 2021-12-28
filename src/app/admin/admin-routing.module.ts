@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminGuardService } from '../shared';
 import {
   AdminComponent,
   AtualizacaoComponent,
@@ -11,6 +12,7 @@ export const AdminRoutes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
+    canActivate: [AdminGuardService],
     children: [
       {
         path: '',
